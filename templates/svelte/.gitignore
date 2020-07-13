@@ -1,7 +1,0 @@
-node_modules
-.now
-build
-package-lock.json
-src/shared/data
-# Local Netlify folder
-.netlify

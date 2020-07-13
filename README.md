@@ -5,3 +5,8 @@ Compose an event driven UI powered by a finite state machine with support for UR
 
 
 [Documentation](https://github.com/qudo-lucas/xcr/tree/master/packages/xcr-core)
+
+## Templates
+* [Svelte Template](https://github.com/qudo-lucas/xcr-template--svelte)
+* Vue Template (coming soon)
+* Vue Template (coming soon)
