@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.getIncludePaths=void 0;const path_1=require("path");function getIncludePaths(a,b=[]){return[...new Set([...b,"node_modules",process.cwd(),path_1.dirname(a)])]}exports.getIncludePaths=getIncludePaths;

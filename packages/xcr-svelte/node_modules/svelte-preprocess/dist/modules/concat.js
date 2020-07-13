@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.concat=void 0;function concat(...a){return a.reduce((b,c)=>c?b.concat(c):b,[])}exports.concat=concat;

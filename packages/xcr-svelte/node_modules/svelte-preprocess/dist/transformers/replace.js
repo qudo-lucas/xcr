@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});const transformer=async({content:a,options:b})=>{let c=a;for(const[d,e]of b)c=c.replace(d,e);return{code:c}};exports.default=transformer;
