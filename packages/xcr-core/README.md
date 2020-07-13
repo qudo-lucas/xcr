@@ -85,7 +85,7 @@ const routes =  {
 
 ### Templates
 `xcr` is easy to setup but if you want a head start in your favorite framework, here are a couple templates using a simple form and a couple views. 
-* [Svelte Template]()
+* [Svelte Template](https://github.com/qudo-lucas/xcr/tree/master/templates/svelte)
 * Vue Template (coming soon)
 * Vue Template (coming soon)
 
