@@ -1,16 +1,7 @@
-# Xstate View Controller
-Example of how xstate can be used to build your UI.
+# XCR Template --- Svelte
+Compose an event driven UI powered by a finite state machine with support for URLs.
 
-### Start Dev Server
-```bash
-npm run dev
-```
+*Huge thanks to [XState](https://xstate.js.org/docs/) and [xstate-component-tree](https://github.com/tivac/xstate-component-tree) for making this project possible.*
 
-### What You Get
-* `xstate` + router implementation to map urls to state machine components.
-* `eslint` + [config](https://www.npmjs.com/package/@tivac/eslint-config).
-* `jest` setup and working with Svelte components.
-* `sass` available for use as JS imports or in Svelte components. For component usage, add `lang="scss"` to your `style` tags.
-* `babel` + default config
 
-Usage instructions coming soon.
+[Documentation](https://github.com/qudo-lucas/xcr/tree/master/packages/xcr-core)
