@@ -13,8 +13,9 @@ npm install xcr-svelte
 # Vue and React coming soon
 ```
 
-# How It Works
-Once you setup your state machine, it might look something like this:
+# How It Works (High Level)
+### Config
+`XCR` requires basic understanding of [XState](https://xstate.js.org/docs/) and how to structure a state machine config. Here's an example of what a config could look like.
 
 ```javascript
 import { actions } from "xstate";
@@ -57,7 +58,10 @@ export default {
     },
 };
 ```
-`xcr` then utilizes `xstate-component-tree` in order to turn your state chart into an array of components that correspond with the current state(s) of your machine:
+
+### Component Tree
+`XCR` utilizes `xstate-component-tree` in order to turn your state chart into an array of components that represent the structure of the config. You can then loop over the components tree array in the framework of your choice. Notice how the initial state of the machine above would be `auth.signin`. Since both of these states have a component attatched to them, we would expect the component tree to look like this.
+
 ```javascript
 [{
     component: auth,
@@ -68,8 +72,18 @@ export default {
     }]
 }]
 ```
-From here you can loop over these components in the framework of you choice.
 
+And if we transitioned into the `home` state, we would expect the updated component tree to look like this:
+```javascript
+[{
+    component: home,
+    props: false
+    children : []
+}]
+```
+
+
+### Using URLs
 If you would like certain URLs to map to certain states, you can provide a routes option:
 ```javascript
 const routes =  {
@@ -83,32 +97,34 @@ const routes =  {
 # Getting Started
 
 
-### Templates
-`xcr` is easy to setup but if you want a head start in your favorite framework, here are a couple templates using a simple form and a couple views. 
-* [Svelte Template](https://github.com/qudo-lucas/xcr/tree/master/templates/svelte)
+## Templates
+`XCR` is easy to setup but if you want a head start in your favorite framework, here are a couple templates using a simple form and a couple views. 
+* [Svelte Template](https://github.com/qudo-lucas/xcr-template--svelte)
 * Vue Template (coming soon)
 * Vue Template (coming soon)
 
 ## Config
-The machine config is a standard XState config. You might notice the `component` function. This is a helper provided by by `xcr` to transform any state into something that `xstate-component-tree` can read. This is only required when a state represents a component.
+The machine config is a standard [XState](https://xstate.js.org/docs/) config. `XCR` provides a `component()` function to make it easier to transform any state into something that `xstate-component-tree` can read. The `component()` helper is only required when a state represents a component.
 
 ```javascript
 component(
     // This can be an inline import if your build system supports it.
     // For Rollup, just add  "inlineDynamicImports : true" to your config.
     // The Components component will be able to differentiate between import types.
-    [Component Import],
+    [Component (Import)],
 
     // The XState state object.
     [State (Object)],
 
     // Static props that will be passed into the component
     // when using the Components component.
-    [Pops (Object)]
+    [Props (Object)]
 )
 
 ```
 ```javascript
+import Signin from "views/auth/pages/signin.svelte";
+
 import { component } from "xcr";
 
 export default {
@@ -120,11 +136,13 @@ export default {
     },
     
     states : {
+        // Inline import
         auth : component(import("views/auth/auth.svelte"), {
 			initial : "signin",
 					
             states : {
-                signin : component(import("views/auth/pages/signin.svelte"), {
+                // Top level import
+                signin : component(Signin, {
                     on : {
                         NEXT : "info"
                     },
@@ -147,10 +165,6 @@ export default {
 
 ## Service
 The service file handles initializing the router and extracting the `XState` service and component tree. Here is an example of what a service could look like.
-
-1. Import the router and state machine config.
-2. Define routes.
-3. Create the router, and deconstruct service and components off of the result.
 
 ``` javascript
 // service.js
@@ -175,11 +189,14 @@ const { service, components } = router(
 components((tree) => {
     // Assign tree to a value your app can subscribe to, probably a store.
 });
+
+export default service;
 ```
 
 ```javascript
 
 router(
+    // XState machine config
     [StateMachineConfig (Object)],
     
     // Default: {}
@@ -270,7 +287,10 @@ export default {
 
 ## Svelte
 ___
-Svelte helpers: `npm install xcr-svelte`
+[Template](https://github.com/qudo-lucas/xcr-template--svelte)
+
+Framework helpers: `npm install xcr-svelte`
+
 ``` javascript
 // service.js
 import router from "xcr";
@@ -292,11 +312,10 @@ const { service, components } = router(
     }
 );
 
-// Whenever the components list updates save off value to store.
-const tree = writable([], (set) =>
-    components((list) => {
-        set(list);
-    })
+// Whenever the tree updates save value off to tree store.
+const tree = writable([],
+    (set) =>
+        components((list) => set(list))
 );
 
 export default service;
@@ -308,11 +327,11 @@ export {
 // app.svelte (top level component)
 
 <script>
-// The store created in service.js
+// The store created above in service.js
 import { components } from "shared/service.js";
 
-// Helper component from xcr that handles looping over an array of components
-import { Components } from "@xcr/svelte";
+// Helper component from xcr that handles looping over the component tree.
+import { Components } from "xcr-svelte";
 
 </script>
 
@@ -321,7 +340,7 @@ import { Components } from "@xcr/svelte";
     which should be an array of components created by the service.
     Note: this will only loop over the top level of current components.
     If one of our top level views has child states, we will need another
-    Components component in those child component. See below.-->
+    Components component in those child components. See below.-->
 	<Components components={$components} />
 </div>
 
@@ -333,13 +352,13 @@ import { Components } from "@xcr/svelte";
 // Looking at our state chart from above,
 // notice the auth state has two child states, signin and info.
 // Our app.svelte will handle rendering this component,
-// but not any children of this component. To solve this you need to add the
+// but not any children below this component. To solve this we need to add the
 // Components component to any component that has child states.
 
-import { Components } from "@xcr/svelte";
+import { Components } from "xcr-svelte";
 import service from "shared/service.js";
 
-// app.svelte handed us this as a prop so there's no need to
+// app.svelte handed us the component tree as a prop so there's no need to
 // import and subscribe to the store again from service.js.
 // All levels below the top level subscription can just
 // forward on the components prop. 
