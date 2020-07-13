@@ -1,6 +1,6 @@
 {
-  "name": "@xcr/svelte",
-  "version": "1.0.0",
+  "name": "xcr-svelte",
+  "version": "0.0.1",
   "description": "Svelte helpers for XCR.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

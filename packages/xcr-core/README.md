@@ -270,7 +270,7 @@ export default {
 
 ## Svelte
 ___
-Svelte helpers: `npm install @xcr/svelte`
+Svelte helpers: `npm install xcr-svelte`
 ``` javascript
 // service.js
 import router from "xcr";
