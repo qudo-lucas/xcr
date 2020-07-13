@@ -8,7 +8,7 @@ Compose an event driven UI powered by a finite state machine with support for UR
 
 Install supported framework helpers:
 ```bash
-npm install @xcr/svelte
+npm install xcr-svelte
 
 # Vue and React coming soon
 ```
