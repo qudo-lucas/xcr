@@ -3,14 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "build.js",
-  "watch": {
-    "build": "{src,test}/*.md"
-  },
   "scripts": {
     "build": "node build.js",
     "autobuild": "watch 'npm run build' src",
     "serve": "sirv build",
-    "dev": "concurrently 'npm run autobuild' 'npm run serve'"
+    "dev": "concurrently 'npm run autobuild' 'npm run serve'",
+    "now": "now"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +16,8 @@
     "concurrently": "^5.2.0",
     "fs-extra": "^9.0.1",
     "markdown-it": "^11.0.0",
+    "now": "^19.1.2",
+    "now-cli": "0.0.0",
     "npm-watch": "^0.6.0",
     "sirv-cli": "^1.0.3",
     "watch": "^1.0.2"
