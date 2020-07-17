@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XState Component Router</title>
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="navs.css" />
+    <link rel="stylesheet" href="sections.css" />
     <link rel="stylesheet" href="prism.css" />
 </head>
 <body>
@@ -26,16 +28,15 @@
         <div class="sidenav">
             <div class="links">
                 <div class="top">
-                    <h4 class="title">DOCUMENTATION</h4>
                     {nav}
                 </div>
             </div>
         </div>
         <div class="chapters">
-            <div class="intro">
-                <h1>Welcome</h1>
+            <section class="intro">
+                <h1 class="section">Welcome</h1>
                 <p>Compose an event driven UI powered by a finite state machine with support for URLs.</p>
-                <p>Huge thanks to <a href="https://xstate.js.org/">XState</a> and <a href="https://github.com/tivac/xstate-component-tree">xstate-component-tree</a> for making this project possible.</p>
+                <i>Huge thanks to <a href="https://xstate.js.org/">XState</a> and <a href="https://github.com/tivac/xstate-component-tree">xstate-component-tree</a> for making this project possible.</i>
                 <br />
                 <br />
                 <strong>📦 XCR Core</strong>
@@ -58,8 +59,8 @@
                     XCR React Helpers
                 </strong>
                 <pre class=" language-bash"><code class=" language-bash"># Coming soon</code></pre>
-            </div>
-            {chapters}
+            </section>
+            {sections}
         </div>
     </main>
 

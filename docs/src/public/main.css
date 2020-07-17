@@ -3,7 +3,7 @@
 html,body {
     margin: 0 auto;
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     min-width: 500px;
     --color: #000000cf;
 }
@@ -48,7 +48,7 @@ h1,h2,h3 {
 
 
 p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-collapse: collapse;
     tab-size: 2;
     box-sizing: inherit;
@@ -87,127 +87,10 @@ a:active {
 }
 
 
-.nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 1rem;
-    width: 100vw;
-    box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.25);
-    z-index: 1;
-    background: white;
-}
-
-.nav .project-icon {
-    height: 1.5rem;
-    margin-right: 1rem;
-}
-
-.nav .logo {
-    height: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.315);
-    border-width: 0 1px 0 0;
-    padding-right: 1.5rem;
-}
-
-.nav .name {
-    margin-left: 1.5rem;
-    margin-bottom: -5px;
-}
-
 .main {
     margin: auto;
     display: grid;
     grid-template: 1fr / 350px 1fr;
     min-height: 100vh;
     letter-spacing: .01em;
-}
-
-.sidenav {
-    min-height: 100%;
-    background: white;
-    padding: 6rem 2rem 2rem 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.315);
-    border-width: 0 1px 0 0;
-    overflow: auto;
-}
-
-.sidenav .links {
-    position: fixed;
-    top: 6rem;
-    height: calc(100vh - 8rem);
-    white-space: nowrap;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.sidenav .sub {
-    margin-left: 2rem;
-}
-
-.sidenav .footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.sidenav .footer .icon {
-    width: 40px;
-}
-
-.sidenav h4 {
-    border-collapse: collapse;
-    line-height: 1.2;
-    box-sizing: inherit;
-    margin: 0;
-    text-decoration: none;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    padding: 2rem 0 .5rem 0;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    color: var(--color);
-}
-.sidenav a {
-    display: block;
-    margin: .5rem 0;
-    margin-top: .75rem;
-    opacity: .85;
-}
-
-.intro {
-    padding: 3rem 0;
-}
-
-.chapters {
-    padding: 3rem 3rem 0 3rem;
-    max-width: 60rem;
-}
-
-.chapter {
-    margin-top: 6rem;
-}
-
-.chapters h1 {
-    padding: 2rem 1.6rem 1rem 0.2rem;
-}
-
-.chapters h2 {
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-}
-
-.chapters h3 {
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-}
-
-.chapters .intro h1 {
-    padding: 0;
-    border-top: 0;
 }

@@ -1,0 +1,81 @@
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    width: 100vw;
+    box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    background: white;
+}
+
+.nav .project-icon {
+    height: 1.5rem;
+    margin-right: 1rem;
+}
+
+.nav .logo {
+    height: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.315);
+    border-width: 0 1px 0 0;
+    padding-right: 1.5rem;
+}
+
+.nav .name {
+    margin-left: 1.5rem;
+    margin-bottom: -5px;
+}
+
+.sidenav {
+    min-height: 100%;
+    background: white;
+    padding: 6rem 2rem 2rem 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.315);
+    border-width: 0 1px 0 0;
+    overflow: auto;
+}
+
+.sidenav .links {
+    position: fixed;
+    top: 6rem;
+    height: calc(100vh - 8rem);
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidenav .section,
+.sidenav .chapter,
+.sidenav .sub-chapter  {
+    display: block;
+    margin: .5rem 0;
+    opacity: .85;
+    font-size: 1.5rem;
+}
+
+.sidenav .section {
+    font-weight: 700;
+    border-width: 0 0 1px 0;
+    padding: .5rem 0;
+}
+.sidenav .section:not(:first-child) {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border: 1px solid #96969659;
+    border-width: 1px 0 0 0;
+}
+
+.sidenav .chapter,
+.sidenav .sub-chapter {
+    font-size: 1rem;
+}
+
+.sidenav .chapter {
+    font-weight: 700;
+
+}
+
+.sidenav .sub-chapter {
+    margin-left: 1.5rem;
+}

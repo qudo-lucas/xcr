@@ -4,21 +4,24 @@
   "description": "",
   "main": "build.js",
   "scripts": {
-    "build": "node build.js",
-    "autobuild": "watch 'npm run build' src",
+    "build": "node ./build.js",
+    "dev": "export NODE_ENV=development && node ./build.js",
     "serve": "sirv build",
-    "dev": "concurrently 'npm run autobuild' 'npm run serve'",
+    "autobuild": "rollup -c -w",
     "now": "now"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@rollup/plugin-html": "^0.2.0",
     "concurrently": "^5.2.0",
     "fs-extra": "^9.0.1",
     "markdown-it": "^11.0.0",
+    "node-watch": "^0.6.4",
     "now": "^19.1.2",
     "now-cli": "0.0.0",
     "npm-watch": "^0.6.0",
+    "rollup": "^2.21.0",
     "sirv-cli": "^1.0.3",
     "watch": "^1.0.2"
   }
