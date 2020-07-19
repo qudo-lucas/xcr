@@ -4,7 +4,9 @@ import ComponentTree from "xstate-component-tree";
 
 import component from "./utilities/component.js";
 import parseURL from "./_internal/url.js";
+import wait from "./_internal/wait.js";
 
+let first = true;
 
 // TODO: options { fallback : 'initial' or 'state' }
 export default (config, routes, { debug = false, name = "XCR", fallback = false }) => {
@@ -22,6 +24,7 @@ export default (config, routes, { debug = false, name = "XCR", fallback = false 
     };
     
     routesMap.forEach((value, url) => {
+        // remove leading and trailing "/"
         events[`xcr:url:${url}`] = value.replace(/^\/|\/$/g, "");
     });
 
@@ -39,7 +42,7 @@ export default (config, routes, { debug = false, name = "XCR", fallback = false 
     const machine = Machine(updatedConfig);
     const service = interpret(machine);
 
-    const components = (cb) => new ComponentTree(service, cb);
+    const components = (cb) =>  new ComponentTree(service, cb);
 
     service.start();
 
@@ -51,8 +54,10 @@ export default (config, routes, { debug = false, name = "XCR", fallback = false 
     }
 
     // Handle routing
-    const updateViewFromURL = () => {
+    const updateViewFromURL = async () => {
         const { params, path } = parseURL(window.location.hash);
+
+        console.log({path});
 
         if(debug) {
             // eslint-disable-next-line no-console
@@ -63,10 +68,15 @@ export default (config, routes, { debug = false, name = "XCR", fallback = false 
         }
 
         if(routesMap.has(path)) {
-            // service.send({
-            //     type : "xcr:update:params",
-            //     params,
-            // });
+            // TODO look into an xstate onReady solution.
+            // Wait a sec to ensure service is ready.
+            if(first) {
+                first = false;
+                
+                await wait(500);
+
+                return service.send(`xcr:url:${path}`);
+            } 
 
             service.send(`xcr:url:${path}`);
         } else if(fallback){
@@ -74,12 +84,15 @@ export default (config, routes, { debug = false, name = "XCR", fallback = false 
         }
     };
 
-    updateViewFromURL();
-
     // Update url if current state matches one of the routes in routes.js
     service.subscribe((current) => {
+        // Get most recent state (current state)
+        const stateString = current.toStrings().pop();
+
         routesMap.forEach((value, url) => {
-            history.pushState({}, name, `#/${url.replace("xcr:url:", "")}`);
+            if(value === stateString) {
+                history.pushState({}, name, `#/${url}`);
+            }
         });
 
         if(debug) {
@@ -87,6 +100,8 @@ export default (config, routes, { debug = false, name = "XCR", fallback = false 
             console.log("State", current.value);
         }
     });
+
+    updateViewFromURL();
 
     // Recheck the URL when these things happen
     window.onpopstate = updateViewFromURL;
