@@ -4,7 +4,6 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import scss from "rollup-plugin-scss";
 
-
 const buildDocs = require("./plugin-build-docs.js");
 
 const production = !process.env.ROLLUP_WATCH;
