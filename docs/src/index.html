@@ -5,36 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XState Component Router</title>
     <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="navs.css" />
-    <link rel="stylesheet" href="sections.css" />
-    <link rel="stylesheet" href="prism.css" />
 </head>
 <body>
-    <div class="nav d-flex align-items-center justify-content-between">
+    <!-- <div class="nav d-flex align-items-center justify-content-between">
         <div class="col d-flex align-items-center">
-            <img class="logo" src="XCR.svg"/>
             <h3 class="name">XSTATE COMPONENT ROUTER</h3>
         </div>
         <div class="col">
             <a class="no-border" href="https://github.com/qudo-lucas/svelte-router" target="_blank">
-                <img class="project-icon" src="github.svg" />
+                <img class="project-icon" src="img/github.svg" />
             </a>
             <a class="no-border" href="https://twitter.com/qudolucas" target="_blank">
-                <img class="project-icon" src="twitter.svg" />
+                <img class="project-icon" src="img/twitter.svg" />
             </a>
         </div>
-    </div>
-    <main class="main">
-        <div class="sidenav">
-            <div class="links">
-                <div class="top">
-                    {nav}
+    </div> -->
+    <main class="main d-flex">
+        <div class="nav d-flex flex-column">
+            <!-- <div class="info">
+                <h3 class="name">XSTATE COMPONENT ROUTER</h3>
+                <div class="d-flex align-items-center">
+                    <a class="no-border" href="https://github.com/qudo-lucas/svelte-router" target="_blank">
+                        <img class="project-icon" src="img/github.svg" />
+                    </a>
+                    <a class="no-border" href="https://twitter.com/qudolucas" target="_blank">
+                        <img class="project-icon" src="img/twitter.svg" />
+                    </a>
                 </div>
             </div>
+            <div class="links">
+                <div class="top">
+                    
+                </div>
+            </div> -->
+            
+            <a class="no-border title" href="#intro">
+                XSTATE COMPONENT ROUTER
+            </a>
+            <div class="d-flex">
+                <button class="align-button" data-position="left">
+                    <img src="img/icon-left-align.svg"/>
+                </button>
+                <button class="align-button" data-position="center">
+                    <img src="img/icon-center-align.svg"/>
+                </button>
+                <button class="align-button" data-position="right">
+                    <img src="img/icon-right-align.svg"/>
+                </button>
+            </div>
+            <hr />
+            {nav}
         </div>
         <div class="chapters">
-            <section class="intro">
-                <h1 class="section">Welcome</h1>
+            <section id="intro" class="intro">
+                <h1 class="section">XCR</h1>
                 <p>Compose an event driven UI powered by a finite state machine with support for URLs.</p>
                 <i>Huge thanks to <a href="https://xstate.js.org/">XState</a> and <a href="https://github.com/tivac/xstate-component-tree">xstate-component-tree</a> for making this project possible.</i>
                 <br />
@@ -43,19 +67,19 @@
                 <pre class=" language-bash"><code class=" language-bash">npm install xcr</code></pre>
                 <br />
                 <strong class="d-flex align-items-center">
-                    <img class="icon" src="svelte.png" height="20px"/>
+                    <img class="icon" src="img/svelte.png" height="20px"/>
                     XCR Svelte Helpers
                 </strong>
                 <pre class=" language-bash"><code class=" language-bash">npm install xcr-svelte</code></pre>
                 <br />
                 <strong class="d-flex align-items-center">
-                    <img class="icon" src="vue.png" height="20px"/>
+                    <img class="icon" src="img/vue.png" height="20px"/>
                     XCR Vue Helpers
                 </strong>
                 <pre class=" language-bash"><code class=" language-bash"># Coming soon</code></pre>
                 <br />
                 <strong class="d-flex align-items-center">
-                    <img class="icon" src="react.svg" height="20px"/>
+                    <img class="icon" src="img/react.svg" height="20px"/>
                     XCR React Helpers
                 </strong>
                 <pre class=" language-bash"><code class=" language-bash"># Coming soon</code></pre>
@@ -64,6 +88,7 @@
         </div>
     </main>
 
-    <script src="/prism.js"></script>
+    <script src="js/prism.js"></script>
+    <script src="js/bundle.js"></script>
 </body>
 </html>

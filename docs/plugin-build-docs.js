@@ -74,7 +74,7 @@ const buildHTML = (sections) => {
                 <h1 class="section">${sectionTitle}</h1>
         `;
 
-        // Loop through each chapter within the secion
+        // Loop through each chapter within the section
         chapters.forEach(({ name, data }) => {
             // Locate first h1 tag and it's contents
             const [ h1 ] = tag("h1", data);
@@ -84,12 +84,13 @@ const buildHTML = (sections) => {
 
             const chapterId = `${sectionId}--${clean(chapterTitle)}`;
 
+ 
             // Add chapter title as nav item under the section
-            navHTML += `<a class="no-border chapter" href="#${sectionId}">${chapterTitle}</a>`;
+            navHTML += `<a class="no-border chapter" href="#${chapterId}">${chapterTitle}</a>`;
 
             // Turn the section header into a link
             data = data.replace(`<h1>${chapterTitle}</h1>`,
-            `<a class="no-border" href="#${chapterId}">
+            `<a class="no-border target" href="#${chapterId}">
                 <span id="${chapterId}" class="anchor"></span>
                 <h1 class="chapter">${chapterTitle}</h1>
             </a>`);
@@ -104,7 +105,7 @@ const buildHTML = (sections) => {
                     const subChapterId = `${sectionId}--${chapterId}--${clean(subChapterTitle)}`;
         
                     data = data.replace(`<h2>${subChapterTitle}</h2>`,
-                        `<a class="no-border" href="#${subChapterId}">
+                        `<a class="no-border target" href="#${subChapterId}">
                             <span id="${subChapterId}" class="anchor"></span>
                             <h2>${subChapterTitle}</h2>
                         </a>`);
@@ -126,7 +127,7 @@ const buildHTML = (sections) => {
 }
 
 module.exports = async ({ template, sections }) => {
-    console.log("Bilding...")
+    console.log("🛠️ Bilding documentation...")
     try {
         let html = await read(path.join(__dirname, template));
 
@@ -143,7 +144,7 @@ module.exports = async ({ template, sections }) => {
         fs.writeFile(`${__dirname}/build/index.html`, html, () => null);
         fs.copy(`${__dirname}/src/public`, `${__dirname}/build`);
 
-        console.log("Complete!")
+        console.log("✅ Build complete!")
     } catch(err) {
         console.log(err);
     }
