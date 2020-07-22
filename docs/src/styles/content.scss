@@ -1,0 +1,55 @@
+.chapters {
+    padding: 3rem 3rem 0 3rem;
+    max-width: 60rem;
+}
+
+.chapters .intro h1 {
+    padding: 0;
+    border-top: 0;
+}
+
+.chapters .section {
+    margin-top: 8rem;
+}
+
+.chapters .intro .section {
+    margin-top: 0;
+}
+
+.intro h1.section {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+h1.section {
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+h1.chapter {
+    font-size: 1.5rem;
+    margin-top: 3.99rem;
+    margin-bottom: 2rem;
+    padding-bottom: .75rem;
+    border: 1px solid rgba(0, 0, 0, 0.356);
+    border-width: 0 0 1px 0;
+}
+
+.chapters h2,
+.chapters h3 {
+    margin-top: 3rem;
+    margin-bottom: .75rem;
+}
+
+.chapters h2 {
+    font-size: 1rem;
+}
+
+.chapters h3 {
+    font-size: 1rem;
+}
+
+.chapters p {
+    margin-top: .5rem;
+}
+
