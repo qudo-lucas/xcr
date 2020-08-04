@@ -8,8 +8,22 @@ import wait from "./_internal/wait.js";
 
 let first = true;
 
-// TODO: options { fallback : 'initial' or 'state' }
-export default (config, routes, { debug = false, name = "XCR", fallback = false }) => {
+export default ({
+    xstate : {
+        config : xStateConfig = {},
+        options : xStateOptions = {}
+    } = {},
+
+    router : {
+        name = "XCR",
+        routes = [],
+        fallback  = false,
+    } = {},
+
+    options : {
+        debug = false,
+    } = {},
+}) => {
     const routesMap = new Map(Object.entries(routes));
     
     // events to add to their config
@@ -30,7 +44,7 @@ export default (config, routes, { debug = false, name = "XCR", fallback = false 
 
     // Add routes as top level events
     const updatedConfig = {
-        ...config,
+        ...xStateConfig,
 
         on : {
             ...config.on,
@@ -39,7 +53,7 @@ export default (config, routes, { debug = false, name = "XCR", fallback = false 
     };
 
     // eslint-disable-next-line new-cap
-    const machine = Machine(updatedConfig);
+    const machine = Machine(updatedConfig, xStateOptions);
     const service = interpret(machine);
 
     const components = (cb) =>  new ComponentTree(service, cb);
@@ -97,7 +111,7 @@ export default (config, routes, { debug = false, name = "XCR", fallback = false 
 
         if(debug) {
             // eslint-disable-next-line no-console
-            console.log("State", current.value);
+            console.log("State", current);
         }
     });
 
