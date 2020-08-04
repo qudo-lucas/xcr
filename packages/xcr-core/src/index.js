@@ -23,7 +23,7 @@ export default ({
     options : {
         debug = false,
     } = {},
-}) => {
+} = {}) => {
     const routesMap = new Map(Object.entries(routes));
     
     // events to add to their config
@@ -47,7 +47,7 @@ export default ({
         ...xStateConfig,
 
         on : {
-            ...config.on,
+            ...xStateConfig.on,
             ...events,
         },
     };
