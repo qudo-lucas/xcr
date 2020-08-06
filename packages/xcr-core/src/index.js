@@ -2,11 +2,15 @@
 import { Machine, interpret, assign } from "xstate";
 import ComponentTree from "xstate-component-tree";
 
-import component from "./utilities/component.js";
-import parseURL from "./_internal/url.js";
+import componentUtil from "./utilities/component.js";
+import paramsUtil from "./utilities/params.js";
+
+import { parseURL, params } from "./_internal/url.js";
 import wait from "./_internal/wait.js";
 
 let first = true;
+
+let lastPath = "";
 
 export default ({
     xstate : {
@@ -25,6 +29,10 @@ export default ({
     } = {},
 } = {}) => {
     const routesMap = new Map(Object.entries(routes));
+    const { paramsObj } = params();
+    const initialContext = {
+        params : paramsObj
+    };
     
     // events to add to their config
     const events = {
@@ -54,7 +62,10 @@ export default ({
 
     // eslint-disable-next-line new-cap
     const machine = Machine(updatedConfig, xStateOptions);
-    const service = interpret(machine);
+    const contextMachine = machine.withContext({
+        ...initialContext,
+    });
+    const service = interpret(contextMachine);
 
     const components = (cb) =>  new ComponentTree(service, cb);
 
@@ -69,15 +80,13 @@ export default ({
 
     // Handle routing
     const updateViewFromURL = async () => {
-        const { params, path } = parseURL(window.location.hash);
-
-        console.log({path});
+        const path = parseURL(window.location.hash);
 
         if(debug) {
             // eslint-disable-next-line no-console
             console.log("URL", {
                 path,
-                params,
+                params : paramsObj,
             });
         }
 
@@ -102,10 +111,14 @@ export default ({
     service.subscribe((current) => {
         // Get most recent state (current state)
         const stateString = current.toStrings().pop();
+        
+        const paramsString = Object.entries(current.context.params)
+            .map(([key, val]) => `${key}=${val}`)
+            .join("&");
 
         routesMap.forEach((value, url) => {
             if(value === stateString) {
-                history.pushState({}, name, `#/${url}`);
+                history.pushState({}, name, `#/${url}${paramsString ? `?${paramsString}` : ""}`);
             }
         });
 
@@ -128,5 +141,6 @@ export default ({
 };
 
 export {
-    component,
+    componentUtil as component,
+    paramsUtil as params,
 };

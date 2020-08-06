@@ -1,5 +1,5 @@
 
-const sanitizeURL = (str) => {
+const parseURL = (str = window.location.hash) => {
     // grab everything after "#/"up until the ?
     let [ url ] = str.split("?");
 
@@ -11,26 +11,24 @@ const sanitizeURL = (str) => {
     return url;
 };
 
-const getParams = (url) => {
-    const [ , params = false ] = url.split("?");
-    
-    if(!params) {
-        return {};
-    }
-
-    const segments = params.split("&");
+const params = () => {
     const paramsObj = {};
 
-    segments.forEach((segment) => {
-        const [ key, val ] = segment.split("=");
+    // Will turn into a string cuz JS is cool
+    const paramsString = [];
 
-        paramsObj[key] = val;
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        paramsObj[key] = value;
+        paramsString.push(`${key}=${value}`);
     });
 
-    return paramsObj;
-};
+    return {
+        paramsObj,
+        paramsString : paramsString.join("&")
+    };
+}
 
-export default (url) => ({
-    params : getParams(url),
-    path   : sanitizeURL(url),
-});
+export {
+    params,
+    parseURL,
+}

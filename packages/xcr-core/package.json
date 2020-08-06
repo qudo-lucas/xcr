@@ -1,6 +1,6 @@
 {
   "name": "xcr",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Compose your application from a state machine.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
