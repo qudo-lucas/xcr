@@ -6,7 +6,8 @@
   "module": "dist/index.mjs",
   "scripts": {
     "build": "rollup -c",
-    "dev": "npm run build -- -w"
+    "dev": "npm run build -- -w",
+    "serve": "sirv dev-build --dev"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
     "rollup-plugin-multi-input": "^1.1.1",
     "rollup-plugin-svelte": "^5.2.3",
     "rollup-plugin-terser": "^6.1.0",
+    "sirv-cli": "^1.0.8",
     "svelte": "^3.24.0"
   },
   "dependencies": {

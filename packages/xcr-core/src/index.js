@@ -20,7 +20,7 @@ export default ({
 
     router : {
         name = "XCR",
-        routes = [],
+        routes = {},
         fallback  = false,
     } = {},
 
@@ -30,6 +30,7 @@ export default ({
 } = {}) => {
     const routesMap = new Map(Object.entries(routes));
     const { paramsObj } = params();
+    console.log(params())
     const initialContext = {
         params : paramsObj
     };
@@ -106,21 +107,26 @@ export default ({
             service.send("xcr:404");
         }
     };
-
+    // http://mydevhost.apple.com:5000/#/project?org=fear&project=Test_Project_6
     // Update url if current state matches one of the routes in routes.js
     service.subscribe((current) => {
-        // Get most recent state (current state)
-        const stateString = current.toStrings().pop();
+        const stateHistory = current.toStrings().reverse();
         
         const paramsString = Object.entries(current.context.params)
             .map(([key, val]) => `${key}=${val}`)
             .join("&");
+        
+        // .find() so we can break.
+        stateHistory.find((state) => {
+            // console.log(Object.entries(routes))
+            const [ route ] = Object.entries(routes).find(([ , val ]) => val === state) || [ false ];
 
-        routesMap.forEach((value, url) => {
-            if(value === stateString) {
-                history.pushState({}, name, `#/${url}${paramsString ? `?${paramsString}` : ""}`);
+            if(route) {
+                history.pushState({}, name, `#/${route}${paramsString ? `?${paramsString}` : ""}`);
+
+                return true;
             }
-        });
+        })
 
         if(debug) {
             // eslint-disable-next-line no-console
